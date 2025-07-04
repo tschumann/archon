@@ -1,72 +1,50 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 class Archon
 {
-    public static void Main()
+    private static void StartListener()
     {
-        TcpListener server = null;
+        UdpClient listener = new UdpClient(27015);
+        IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, 27015);
+
         try
         {
-            // Set the TcpListener on port 13000.
-            Int32 port = 13000;
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-
-            // TcpListener server = new TcpListener(port);
-            server = new TcpListener(localAddr, port);
-
-            // Start listening for client requests.
-            server.Start();
-
-            // Buffer for reading data
-            Byte[] bytes = new Byte[256];
-            String data = null;
-
-            // Enter the listening loop.
             while (true)
             {
-                Console.Write("Waiting for a connection... ");
+                Console.WriteLine("Waiting for broadcast");
+                byte[] bytes = listener.Receive(ref groupEP);
 
-                // Perform a blocking call to accept requests.
-                // You could also use server.AcceptSocket() here.
-                using TcpClient client = server.AcceptTcpClient();
-                Console.WriteLine("Connected!");
+                Console.WriteLine($"Received broadcast from {groupEP} :");
+                Console.WriteLine($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
-                data = null;
-
-                // Get a stream object for reading and writing
-                NetworkStream stream = client.GetStream();
-
-                int i;
-
-                // Loop to receive all the data sent by the client.
-                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                if (bytes.Length >= 5 && bytes[0] == 0xFF && bytes[1] == 0xFF && bytes[2] == 0xFF && bytes[3] == 0xFF)
                 {
-                    // Translate data bytes to a ASCII string.
-                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                    Console.WriteLine("Received: {0}", data);
-
-                    // Process the data sent by the client.
-                    data = data.ToUpper();
-
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-
-                    // Send back a response.
-                    stream.Write(msg, 0, msg.Length);
-                    Console.WriteLine("Sent: {0}", data);
+                    if (bytes.Length == 9 && bytes[4] == 0x55 && bytes[5] == 0xFF && bytes[6] == 0xFF && bytes[7] == 0xFF && bytes[8] == 0xFF)
+                    {
+                        Console.WriteLine("Responding to player info request");
+                        listener.Send([0xFF, 0xFF, 0xFF, 0xFF, 0x44, 0x01, 0x00, 0x50, 0x6c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], groupEP);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognised request");
                 }
             }
         }
         catch (SocketException e)
         {
-            Console.WriteLine("SocketException: {0}", e);
+            Console.WriteLine(e);
         }
         finally
         {
-            server.Stop();
+            listener.Close();
         }
+    }
 
-        Console.WriteLine("\nHit enter to continue...");
-        Console.Read();
+    public static void Main()
+    {
+        StartListener();
     }
 }
