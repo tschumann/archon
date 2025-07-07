@@ -1,4 +1,6 @@
-﻿class Vapour
+﻿namespace Vapour;
+
+class Vapour
 {
     public static void Main()
     {
