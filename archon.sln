@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archon", "archon\Archon.csproj", "{B5403CB4-B868-4B22-B520-84ACF9809870}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archon", "Archon\Archon.csproj", "{B5403CB4-B868-4B22-B520-84ACF9809870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour", "Vapour\Vapour.csproj", "{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B5403CB4-B868-4B22-B520-84ACF9809870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5403CB4-B868-4B22-B520-84ACF9809870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5403CB4-B868-4B22-B520-84ACF9809870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
