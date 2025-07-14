@@ -21,9 +21,9 @@ class Archon
                 Console.WriteLine($"Received broadcast from {groupEP} :");
                 Console.WriteLine($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
-                if (bytes.Length >= 5 && bytes[0] == 0xFF && bytes[1] == 0xFF && bytes[2] == 0xFF && bytes[3] == 0xFF)
+                if (Valve.A2S.Query.IsA2SQuery(bytes))
                 {
-                    if (bytes.Length == 9 && bytes[4] == 0x55 && bytes[5] == 0xFF && bytes[6] == 0xFF && bytes[7] == 0xFF && bytes[8] == 0xFF)
+                    if (Valve.A2S.Query.IsPlayerInfoRequest(bytes))
                     {
                         Console.WriteLine("Responding to player info request");
                         listener.Send([0xFF, 0xFF, 0xFF, 0xFF, 0x44, 0x01, 0x00, 0x50, 0x6c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], groupEP);
