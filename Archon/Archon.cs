@@ -23,7 +23,7 @@ class Archon
 
                 if (Valve.A2S.Query.IsA2SQuery(bytes))
                 {
-                    if (Valve.A2S.Query.IsPlayerInfoRequest(bytes))
+                    if (Valve.A2S.Query.IsPlayerRequest(bytes))
                     {
                         Console.WriteLine("Responding to player info request");
                         listener.Send([0xFF, 0xFF, 0xFF, 0xFF, 0x44, 0x01, 0x00, 0x50, 0x6c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], groupEP);
