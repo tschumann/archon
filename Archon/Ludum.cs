@@ -2,9 +2,9 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace Archon;
+namespace Ludum;
 
-class Archon
+class Ludum
 {
     private static void StartListener()
     {

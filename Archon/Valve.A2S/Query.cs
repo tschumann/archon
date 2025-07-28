@@ -1,4 +1,4 @@
-﻿namespace Archon.Valve.A2S;
+﻿namespace Ludum.Valve.A2S;
 
 public class Query
 {

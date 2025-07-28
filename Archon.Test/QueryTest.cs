@@ -1,6 +1,6 @@
-﻿using Archon.Valve.A2S;
+﻿using Ludum.Valve.A2S;
 
-namespace Archon.Test
+namespace Ludum.Test
 {
     [TestClass]
     public sealed class QueryTest
