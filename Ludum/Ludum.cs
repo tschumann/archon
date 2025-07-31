@@ -21,17 +21,15 @@ class Ludum
                 Console.WriteLine($"Received broadcast from {groupEP} :");
                 Console.WriteLine($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
-                if (Valve.A2S.Query.IsA2SQuery(bytes))
+                byte[]? response = Server.HandleRequest(bytes);
+
+                if (response != null)
                 {
-                    if (Valve.A2S.Query.IsPlayerRequest(bytes))
-                    {
-                        Console.WriteLine("Responding to player info request");
-                        listener.Send([0xFF, 0xFF, 0xFF, 0xFF, 0x44, 0x01, 0x00, 0x50, 0x6c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], groupEP);
-                    }
+                    listener.Send(response, groupEP);
                 }
                 else
                 {
-                    Console.WriteLine("Unrecognised request");
+                    Console.WriteLine("Unhandled request");
                 }
             }
         }
