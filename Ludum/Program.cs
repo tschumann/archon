@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ludum;
 
-class Ludum
+class Program
 {
     private static void StartListener()
     {
