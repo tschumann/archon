@@ -1,6 +1,6 @@
 ﻿namespace Vapour;
 
-class Vapour
+public class Program
 {
     public static void Main()
     {

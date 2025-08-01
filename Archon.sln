@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludum.TestClient", "Ludum.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour", "Vapour\Vapour.csproj", "{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Test", "Vapour.Test\Vapour.Test.csproj", "{AD69D000-1128-40CE-AFB7-9AA6D410E9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,8 @@ Global
 		{452BFA32-DEAC-4D3A-9494-9B16F2FFD0AA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD69D000-1128-40CE-AFB7-9AA6D410E9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD69D000-1128-40CE-AFB7-9AA6D410E9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD69D000-1128-40CE-AFB7-9AA6D410E9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD69D000-1128-40CE-AFB7-9AA6D410E9FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
