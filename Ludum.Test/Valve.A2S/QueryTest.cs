@@ -1,6 +1,6 @@
 ﻿using Ludum.Valve.A2S;
 
-namespace Ludum.Test
+namespace Ludum.Test.Valve.A2S
 {
     [TestClass]
     public sealed class QueryTest
