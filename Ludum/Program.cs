@@ -8,14 +8,17 @@ class Program
 {
     private static void StartListener()
     {
-        UdpClient listener = new UdpClient(27015);
-        IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, 27015);
+        int port = 27015;
+
+        UdpClient listener = new UdpClient(port);
+        IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, port);
 
         try
         {
+            Console.WriteLine("Archon waiting for broadcast on port {0}", port);
+
             while (true)
             {
-                Console.WriteLine("Waiting for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
                 Console.WriteLine($"Received broadcast from {groupEP} :");
