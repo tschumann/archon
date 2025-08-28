@@ -1,8 +1,10 @@
-﻿namespace Ludum;
+﻿using Udp;
 
-class Server
+namespace Ludum;
+
+class Server : IUdpRequestHandlerServer
 {
-    public static byte[]? HandleRequest(byte[] request)
+    public byte[]? HandleRequest(byte[] request)
     {
         if (Valve.A2S.Query.IsA2SQuery(request))
         {
@@ -15,4 +17,3 @@ class Server
         return null;
     }
 }
-

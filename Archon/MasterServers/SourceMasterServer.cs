@@ -1,8 +1,10 @@
-﻿namespace Archon.MasterServers;
+﻿using Udp;
 
-public class SourceMasterServer
+namespace Archon.MasterServers;
+
+public class SourceMasterServer : IUdpRequestHandlerServer
 {
-    public static byte[]? HandleRequest(byte[] request)
+    public byte[]? HandleRequest(byte[] request)
     {
         if (IsServerQuery(request))
         {

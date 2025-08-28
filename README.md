@@ -11,8 +11,30 @@ powershell ./test.ps1
 ```
 
 
-Testing
--------
+Testing Archon
+--------------
+
+```
+powershell ./run-archon.ps1
+```
+```
+dotnet run --project Archon.TestClient
+```
+
+
+Testing Ludum
+-------------
+
+```
+powershell ./run-ludum.ps1
+```
+```
+dotnet run --project Ludum.TestClient
+```
+
+
+Testing Vapour
+--------------
 
 ```
 powershell ./run-vapour.ps1
