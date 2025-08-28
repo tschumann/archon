@@ -17,6 +17,8 @@ public class Program
             };
         });
 
+        app.UseAuthMiddleware();
+
         app.Run();
     }
 }
