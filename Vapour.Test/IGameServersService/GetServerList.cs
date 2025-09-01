@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace Vapour.Test
+namespace Vapour.Test.IGameServersService
 {
-    public class IGameServersServiceTest : IClassFixture<WebApplicationFactory<Program>>
+    public class GetServerList : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly HttpClient _client;
 
         private readonly WebApplicationFactory<Program> _factory;
 
-        public IGameServersServiceTest(WebApplicationFactory<Program> factory)
+        public GetServerList(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
             _client = _factory.CreateClient();

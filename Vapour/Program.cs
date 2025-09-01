@@ -1,5 +1,7 @@
 ﻿namespace Vapour;
 
+using Vapour.IGameServersService;
+
 public class Program
 {
     public static void Main()
@@ -8,14 +10,7 @@ public class Program
 
         var gameServersService = app.MapGroup("/IGameServersService");
 
-        gameServersService.MapGet("/GetServerList/v1/", () =>
-        {
-            return new Models.Server()
-            {
-                Name = "Server",
-                Address = "127.0.0.1:27015"
-            };
-        });
+        gameServersService.MapGet("/GetServerList/v1/", GetServerList.Handler);
 
         app.UseAuthMiddleware();
 
