@@ -30,7 +30,7 @@ namespace Vapour.Test.IGameServersService
             var response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
-            Assert.Equal("{\"name\":\"Server\",\"address\":\"127.0.0.1:27015\"}", responseString);
+            Assert.Equal("{\"response\":{\"servers\":[{\"name\":\"Server\",\"address\":\"127.0.0.1:27015\",\"map\":\"map\",\"players\":16,\"max_players\":32}]}}", responseString);
         }
     }
 }
