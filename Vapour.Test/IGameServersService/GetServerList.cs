@@ -30,7 +30,7 @@ namespace Vapour.Test.IGameServersService
             var response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
-            Assert.Equal("{\"response\":{\"servers\":[{\"name\":\"Server\",\"address\":\"127.0.0.1:27015\",\"map\":\"map\",\"players\":16,\"max_players\":32}]}}", responseString);
+            Assert.Equal("{\"response\":{\"servers\":[{\"address\":\"127.0.0.1:27015\",\"gameport\":27015,\"steamid\":\"123\",\"name\":\"Server\",\"appid\":70,\"gamedir\":\"valve\",\"version\":\"1.0.0.0\",\"product\":\"Half-Life\",\"region\":255,\"players\":16,\"max_players\":32,\"bots\":0,\"map\":\"map\",\"secure\":true,\"dedicated\":true,\"os\":\"l\",\"gametype\":\"deathmatch\"}]}}", responseString);
         }
     }
 }
