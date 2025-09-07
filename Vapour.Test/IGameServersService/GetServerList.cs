@@ -30,7 +30,26 @@ namespace Vapour.Test.IGameServersService
             var response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
+            Assert.Equal("{\"response\":{\"servers\":[{\"address\":\"127.0.0.1:27015\",\"gameport\":27015,\"steamid\":\"123\",\"name\":\"Server\",\"appid\":70,\"gamedir\":\"valve\",\"version\":\"1.0.0.0\",\"product\":\"Half-Life\",\"region\":255,\"players\":16,\"max_players\":32,\"bots\":0,\"map\":\"map\",\"secure\":true,\"dedicated\":true,\"os\":\"l\",\"gametype\":\"deathmatch\"},{\"address\":\"127.0.0.1:27015\",\"gameport\":27015,\"steamid\":\"123\",\"name\":\"Server\",\"appid\":50,\"gamedir\":\"gearbox\",\"version\":\"1.0.0.0\",\"product\":\"Half-Life: Opposing Force\",\"region\":255,\"players\":16,\"max_players\":32,\"bots\":0,\"map\":\"of\",\"secure\":true,\"dedicated\":true,\"os\":\"l\",\"gametype\":\"deathmatch\"}]}}", responseString);
+        }
+
+        [Fact]
+        public async void TestGetServerListAuthenticatedFilterAppid()
+        {
+            var response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1&filter=appid\\70");
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"response\":{\"servers\":[{\"address\":\"127.0.0.1:27015\",\"gameport\":27015,\"steamid\":\"123\",\"name\":\"Server\",\"appid\":70,\"gamedir\":\"valve\",\"version\":\"1.0.0.0\",\"product\":\"Half-Life\",\"region\":255,\"players\":16,\"max_players\":32,\"bots\":0,\"map\":\"map\",\"secure\":true,\"dedicated\":true,\"os\":\"l\",\"gametype\":\"deathmatch\"}]}}", responseString);
+
+            response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1&filter=appid\\50");
+            response.EnsureSuccessStatusCode();
+            responseString = await response.Content.ReadAsStringAsync();
+            Assert.Equal("{\"response\":{\"servers\":[{\"address\":\"127.0.0.1:27015\",\"gameport\":27015,\"steamid\":\"123\",\"name\":\"Server\",\"appid\":50,\"gamedir\":\"gearbox\",\"version\":\"1.0.0.0\",\"product\":\"Half-Life: Opposing Force\",\"region\":255,\"players\":16,\"max_players\":32,\"bots\":0,\"map\":\"of\",\"secure\":true,\"dedicated\":true,\"os\":\"l\",\"gametype\":\"deathmatch\"}]}}", responseString);
+
+            response = await _client.GetAsync("/IGameServersService/GetServerList/v1/?key=1&filter=appid\\0");
+            response.EnsureSuccessStatusCode();
+            responseString = await response.Content.ReadAsStringAsync();
+            Assert.Equal("{\"response\":{\"servers\":[]}}", responseString);
         }
     }
 }
