@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Vapour.Test.IGameServersService
 {
-    public class GetServerList : IClassFixture<WebApplicationFactory<Program>>
+    public class GetServerListTest : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly HttpClient _client;
 
         private readonly WebApplicationFactory<Program> _factory;
 
-        public GetServerList(WebApplicationFactory<Program> factory)
+        public GetServerListTest(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
             _client = _factory.CreateClient();

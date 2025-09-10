@@ -1,6 +1,6 @@
-﻿namespace Vapour;
+﻿using Vapour.IGameServersService;
 
-using Vapour.IGameServersService;
+namespace Vapour;
 
 public class Program
 {

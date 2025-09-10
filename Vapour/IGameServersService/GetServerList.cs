@@ -1,16 +1,17 @@
-namespace Vapour.IGameServersService;
-
 using Microsoft.Extensions.Primitives;
-using Models;
+using Vapour.Models;
+using Vapour.Models.Internal;
+
+namespace Vapour.IGameServersService;
 
 /// <summary>
 /// Undocumented by Valve but documented at https://developer.valvesoftware.com/wiki/Talk:Master_Server_Query_Protocol
 /// </summary>
 public class GetServerList
 {
-    private static List<Server> _servers = new List<Server>
-    {
-        new Server()
+    private static readonly List<GameServer> _servers =
+    [
+        new GameServer()
         {
             address = "127.0.0.1:27015",
             gameport = 27015,
@@ -30,7 +31,7 @@ public class GetServerList
             os = "l",
             gametype = "deathmatch"
         },
-        new Server()
+        new GameServer()
         {
             address = "127.0.0.1:27015",
             gameport = 27015,
@@ -50,44 +51,43 @@ public class GetServerList
             os = "l",
             gametype = "deathmatch"
         }
-    };
+    ];
 
-    public static Delegate Handler = (HttpContext httpContext) =>
+    public readonly static Delegate Handler = (HttpContext httpContext) =>
     {
         var filter = httpContext.Request.Query["filter"];
-        Dictionary<string, string> filters = null;
+        ServerListFilter? filters = null;
 
         if (!StringValues.IsNullOrEmpty(filter))
         {
-            filters = new Dictionary<string, string>();
+            filters = new ServerListFilter();
+            // the filters are stored as attr1\val1\attr2\val2 etc
             var filterValues = filter.ToString().Split("\\");
 
-            // TODO: add some validation
+            // TODO: how is validation handled?
             for (var i = 0; i < filterValues.Length; i++)
             {
-                if (i % 2 == 0)
+                // every even-numbered entry is a filter attribute and every odd-numbered entry is the filter value
+                if (i % 2 == 0 && filterValues[i] == "appid")
                 {
-                    filters.Add(filterValues[i], filterValues[i + 1]);
+                    filters.appid = Convert.ToUInt32(filterValues[i + 1]);
                 }
             }
 
-            Console.WriteLine("Using filters {0}", String.Join(Environment.NewLine, filters));
+            Console.WriteLine("Using filters {0}", filters);
         }
 
         var servers = _servers;
 
-        if (filters != null)
+        if (filters?.appid != null)
         {
-            if (filters.ContainsKey("appid"))
-            {
-                servers = servers.Where(server => server.appid == Convert.ToInt32(filters["appid"])).ToList();
-            }
+            servers = servers.Where(server => server.appid == filters.appid).ToList();
         }
 
-        return new Dictionary<string, Dictionary<string, List<Server>>>
+        return new Dictionary<string, Dictionary<string, List<GameServer>>>
         {
             {
-                "response", new Dictionary<string, List<Server>>
+                "response", new Dictionary<string, List<GameServer>>
                 {
                     {
                         "servers", servers

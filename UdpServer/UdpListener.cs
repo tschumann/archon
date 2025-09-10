@@ -2,9 +2,9 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace Udp;
+namespace UdpServer;
 
-public class UdpServer
+public class UdpListener
 {
     private readonly int _port;
 
@@ -12,7 +12,7 @@ public class UdpServer
 
     private IPEndPoint _endpoint;
 
-    public UdpServer(int port)
+    public UdpListener(int port)
     {
         _port = port;
 

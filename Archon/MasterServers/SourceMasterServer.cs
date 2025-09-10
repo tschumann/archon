@@ -1,4 +1,4 @@
-﻿using Udp;
+﻿using UdpServer;
 
 namespace Archon.MasterServers;
 

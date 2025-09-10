@@ -1,5 +1,5 @@
 ﻿using Archon.MasterServers;
-using Udp;
+using UdpServer;
 
 namespace Archon;
 
@@ -7,7 +7,7 @@ class Program
 {
     public static void Main()
     {
-        var server = new UdpServer(27010);
+        var server = new UdpListener(27010);
         server.Listen(new SourceMasterServer());
     }
 }

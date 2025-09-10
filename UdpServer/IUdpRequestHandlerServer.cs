@@ -1,4 +1,4 @@
-﻿namespace Udp;
+﻿namespace UdpServer;
 
 public interface IUdpRequestHandlerServer
 {

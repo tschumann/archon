@@ -1,6 +1,6 @@
-namespace Models;
+namespace Vapour.Models;
 
-class Server
+class GameServer
 {
     // TODO: is it addr or address?
     public required string address { get; set; }
@@ -11,7 +11,7 @@ class Server
 
     public required string name { get; set; }
 
-    public required int appid { get; set; }
+    public required uint appid { get; set; }
 
     public required string gamedir { get; set; }
 
@@ -19,13 +19,13 @@ class Server
 
     public required string product { get; set; }
 
-    public required int region { get; set; }
+    public required uint region { get; set; }
 
-    public required int players { get; set; }
+    public required uint players { get; set; }
 
-    public required int max_players { get; set; }
+    public required uint max_players { get; set; }
 
-    public required int bots { get; set; }
+    public required uint bots { get; set; }
 
     public required string map { get; set; }
 
