@@ -18,6 +18,23 @@ public class AuthMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        // kind of hacky, but figure out whether to run this middleware based on attributes attached to the endpoints
+        // ideally this would all be done with custom authorisation but ASP.Net Core doesn't allow much customisation
+        // of authorisation - at least the error side of it - so we have to use a middleware to do the authorisation
+        // to be able to return the error response that we want to
+        // Steam also combines authorisation and authentication into a single step whereas ASP.Net core has it as two
+        // separate steps
+        if (context.GetEndpoint()?.Metadata.GetMetadata<AuthMetadata>() != null)
+        {
+            _logger.LogInformation("Got metadata for {0}", context.GetEndpoint()?.DisplayName);
+        }
+        else
+        {
+            await _next(context);
+
+            return;
+        }
+
         var key = context.Request.Query["key"];
 
         if (StringValues.IsNullOrEmpty(key))
@@ -35,6 +52,17 @@ public class AuthMiddleware
         }
 
         await _next(context);
+    }
+}
+
+public class AuthMetadata : Attribute
+{
+    public string MetadataValue { get; }
+
+    // TODO: limit the possible values?
+    public AuthMetadata(string metadataValue)
+    {
+        MetadataValue = metadataValue;
     }
 }
 

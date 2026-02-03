@@ -53,7 +53,7 @@ public class GetServerList
         }
     ];
 
-    public readonly static Delegate Handler = (HttpContext httpContext) =>
+    public readonly static Delegate Handler = [AuthMetadata("unused")] (HttpContext httpContext) =>
     {
         var filter = httpContext.Request.Query["filter"];
         ServerListFilter? filters = null;
