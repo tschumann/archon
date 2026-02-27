@@ -1,5 +1,6 @@
 ﻿using Vapour.IGameServersService;
 using Vapour.ISteamUserStats;
+using Vapour.ISteamWebAPIUtil;
 
 namespace Vapour;
 
@@ -18,6 +19,11 @@ public class Program
         var steamUserStats = app.MapGroup("/ISteamUserStats");
 
         steamUserStats.MapGet("/GetNumberOfCurrentPlayers/v1", GetNumberOfCurrentPlayers.Handler);
+
+        var steamWebAPIUtil = app.MapGroup("/ISteamWebAPIUtil");
+
+        steamWebAPIUtil.MapGet("/GetServerInfo/v0001", GetServerInfo.Handler);
+        steamWebAPIUtil.MapGet("/GetSupportedAPIList/v0001", GetSupportedAPIList.Handler);
 
         app.UseAuthMiddleware();
 
