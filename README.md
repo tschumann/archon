@@ -52,3 +52,9 @@ curl -v "http://localhost:57257/IGameServersService/GetServerList/v1/?key=1"
 ```
 curl -v "http://localhost:57257/IGameServersService/GetServerList/v1/?key=1&filter=appid\70"
 ```
+```
+curl -v "http://localhost:57257/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=70"
+```
+```
+curl -v "http://localhost:57257/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=220"
+```
