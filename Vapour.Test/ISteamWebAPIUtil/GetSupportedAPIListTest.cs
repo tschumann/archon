@@ -17,7 +17,7 @@ namespace Vapour.Test.ISteamWebAPIUtil
         [Fact]
         public async void TestGetSupportedAPIList()
         {
-            var response = await _client.GetAsync("/ISteamWebAPIUtil/GetSupportedAPIList/v0001");
+            var response = await _client.GetAsync("/ISteamWebAPIUtil/GetSupportedAPIList/v0001/");
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();

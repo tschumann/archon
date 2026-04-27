@@ -10,6 +10,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
 
+        // NOTE: the trailing / on all these endpoints is optional but the framework seems to handle it being there/not being there
         var app = builder.Build();
 
         var gameServersService = app.MapGroup("/IGameServersService");
@@ -18,13 +19,13 @@ public class Program
 
         var steamUserStats = app.MapGroup("/ISteamUserStats");
 
-        steamUserStats.MapGet("/GetGlobalAchievementPercentagesForApp/v1", GetGlobalAchievementPercentagesForAppV1.Handler);
-        steamUserStats.MapGet("/GetNumberOfCurrentPlayers/v1", GetNumberOfCurrentPlayers.Handler);
+        steamUserStats.MapGet("/GetGlobalAchievementPercentagesForApp/v1/", GetGlobalAchievementPercentagesForAppV1.Handler);
+        steamUserStats.MapGet("/GetNumberOfCurrentPlayers/v1/", GetNumberOfCurrentPlayers.Handler);
 
         var steamWebAPIUtil = app.MapGroup("/ISteamWebAPIUtil");
 
-        steamWebAPIUtil.MapGet("/GetServerInfo/v0001", GetServerInfo.Handler);
-        steamWebAPIUtil.MapGet("/GetSupportedAPIList/v0001", GetSupportedAPIList.Handler);
+        steamWebAPIUtil.MapGet("/GetServerInfo/v0001/", GetServerInfo.Handler);
+        steamWebAPIUtil.MapGet("/GetSupportedAPIList/v0001/", GetSupportedAPIList.Handler);
 
         app.UseAuthMiddleware();
 

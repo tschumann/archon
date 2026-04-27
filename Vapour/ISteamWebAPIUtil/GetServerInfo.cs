@@ -2,6 +2,9 @@
 
 namespace Vapour.ISteamWebAPIUtil;
 
+/// <summary>
+/// See https://api.steampowered.com/ISteamWebAPIUtil/GetServerInfo/v0001/
+/// </summary>
 public class GetServerInfo
 {
     public readonly static Delegate Handler = (HttpContext httpContext) =>

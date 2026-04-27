@@ -19,7 +19,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetGetGlobalAchievementPercentagesForAppNoAchievements()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1?gameid=70");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=70");
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
@@ -29,7 +29,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetGetGlobalAchievementPercentagesForApp()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1?gameid=220");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=220");
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
@@ -39,7 +39,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetNumberOfCurrentPlayersNoSuchGameid()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1?gameid=0");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=0");
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
@@ -49,7 +49,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetNumberOfCurrentPlayersEmptyGameid()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1?gameid=");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=");
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
             Assert.Equal("text/html", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
@@ -59,7 +59,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetNumberOfCurrentPlayersInvalidGameid()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1?gameid=a");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=a");
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
             Assert.Equal("text/html", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
@@ -69,7 +69,7 @@ namespace Vapour.Test.ISteamUserStats
         [Fact]
         public async void TestGetNumberOfCurrentPlayersNoGameid()
         {
-            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1");
+            var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/");
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
             Assert.Equal("text/html", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();

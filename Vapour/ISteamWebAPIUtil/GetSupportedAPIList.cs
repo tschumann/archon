@@ -3,6 +3,9 @@ using Vapour.Models.Internal;
 
 namespace Vapour.ISteamWebAPIUtil;
 
+/// <summary>
+/// See https://api.steampowered.com/ISteamWebAPIUtil/GetSupportedAPIList/v0001/
+/// </summary>
 public class GetSupportedAPIList
 {
     public readonly static Delegate Handler = (HttpContext httpContext, IEnumerable<EndpointDataSource> endpointSources) =>

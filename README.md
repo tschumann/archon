@@ -58,3 +58,12 @@ curl -v "http://localhost:57257/ISteamUserStats/GetGlobalAchievementPercentagesF
 ```
 curl -v "http://localhost:57257/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=220"
 ```
+```
+curl -v "http://localhost:57257/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=220"
+```
+```
+curl -v "http://localhost:57257/ISteamWebAPIUtil/GetServerInfo/v0001/"
+```
+```
+curl -v "http://localhost:57257/ISteamWebAPIUtil/GetSupportedAPIList/v0001/"
+```

@@ -19,7 +19,7 @@ namespace Vapour.Test.ISteamWebAPIUtil
         [Fact]
         public async void TestGetServerInfo()
         {
-            var response = await _client.GetAsync("/ISteamWebAPIUtil/GetServerInfo/v0001");
+            var response = await _client.GetAsync("/ISteamWebAPIUtil/GetServerInfo/v0001/");
             response.EnsureSuccessStatusCode();
             Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();

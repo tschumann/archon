@@ -1,5 +1,8 @@
 ﻿namespace Vapour.ISteamUserStats;
 
+/// <summary>
+/// See https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=220
+/// </summary>
 public class GetNumberOfCurrentPlayers
 {
     public static string MissingAppidErrorMessage = "<html><head><title>Bad Request</title></head><body><h1>Bad Request</h1>Required parameter 'appid' is missing</body></html>";

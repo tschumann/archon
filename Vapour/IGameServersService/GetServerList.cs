@@ -5,6 +5,7 @@ using Vapour.Models.Internal;
 namespace Vapour.IGameServersService;
 
 /// <summary>
+/// See https://api.steampowered.com/IGameServersService/GetServerList/v1/?key=foo&filter=appid\70
 /// Undocumented by Valve but documented at https://developer.valvesoftware.com/wiki/Talk:Master_Server_Query_Protocol
 /// </summary>
 public class GetServerList
