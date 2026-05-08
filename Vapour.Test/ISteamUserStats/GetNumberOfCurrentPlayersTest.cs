@@ -4,16 +4,10 @@ using Vapour.ISteamUserStats;
 
 namespace Vapour.Test.ISteamUserStats
 {
-    public class GetNumberOfCurrentPlayersTest : IClassFixture<WebApplicationFactory<Program>>
+    public class GetNumberOfCurrentPlayersTest : BaseControllerTest
     {
-        private readonly HttpClient _client;
-
-        private readonly WebApplicationFactory<Program> _factory;
-
-        public GetNumberOfCurrentPlayersTest(WebApplicationFactory<Program> factory)
+        public GetNumberOfCurrentPlayersTest(WebApplicationFactory<Program> factory) : base(factory)
         {
-            _factory = factory;
-            _client = _factory.CreateClient();
         }
 
         [Fact]
@@ -21,7 +15,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=70");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"response\":{\"player_count\":1,\"result\":1}}", responseString);
         }
@@ -31,7 +25,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=0");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"response\":{\"player_count\":1,\"result\":1}}", responseString);
         }
@@ -41,7 +35,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"response\":{\"player_count\":1,\"result\":1}}", responseString);
         }
@@ -51,7 +45,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=a");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"response\":{\"player_count\":1,\"result\":1}}", responseString);
         }

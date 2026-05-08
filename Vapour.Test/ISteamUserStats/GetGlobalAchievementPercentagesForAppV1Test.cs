@@ -4,16 +4,10 @@ using Vapour.ISteamUserStats;
 
 namespace Vapour.Test.ISteamUserStats
 {
-    public class GetGlobalAchivementPercentagesForAppV1Test : IClassFixture<WebApplicationFactory<Program>>
+    public class GetGlobalAchivementPercentagesForAppV1Test : BaseControllerTest
     {
-        private readonly HttpClient _client;
-
-        private readonly WebApplicationFactory<Program> _factory;
-
-        public GetGlobalAchivementPercentagesForAppV1Test(WebApplicationFactory<Program> factory)
+        public GetGlobalAchivementPercentagesForAppV1Test(WebApplicationFactory<Program> factory) : base(factory)
         {
-            _factory = factory;
-            _client = _factory.CreateClient();
         }
 
         [Fact]
@@ -21,7 +15,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=70");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{}", responseString);
         }
@@ -31,7 +25,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=220");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"achievementpercentages\":{\"achievements\":{\"achievement\":[{\"name\":\"HL2_ESCAPE_APARTMENTRAID\",\"percent\":\"70.4\"}]}}}", responseString);
         }
@@ -41,7 +35,7 @@ namespace Vapour.Test.ISteamUserStats
         {
             var response = await _client.GetAsync("/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?gameid=0");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{}", responseString);
         }

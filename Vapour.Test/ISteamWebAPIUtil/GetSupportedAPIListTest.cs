@@ -2,16 +2,10 @@
 
 namespace Vapour.Test.ISteamWebAPIUtil
 {
-    public class GetSupportedAPIListTest : IClassFixture<WebApplicationFactory<Program>>
+    public class GetSupportedAPIListTest : BaseControllerTest
     {
-        private readonly HttpClient _client;
-
-        private readonly WebApplicationFactory<Program> _factory;
-
-        public GetSupportedAPIListTest(WebApplicationFactory<Program> factory)
+        public GetSupportedAPIListTest(WebApplicationFactory<Program> factory) : base(factory)
         {
-            _factory = factory;
-            _client = _factory.CreateClient();
         }
 
         [Fact]
@@ -19,7 +13,7 @@ namespace Vapour.Test.ISteamWebAPIUtil
         {
             var response = await _client.GetAsync("/ISteamWebAPIUtil/GetSupportedAPIList/v0001/");
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers?.ContentType?.ToString());
+            Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Equal("{\"apilist\":{\"interfaces\":[{\"name\":\"IGameServersService\",\"methods\":[{\"name\":\"GetServerList\",\"version\":1,\"httpmethod\":\"GET\",\"parameters\":[]}]},{\"name\":\"ISteamUserStats\",\"methods\":[{\"name\":\"GetGlobalAchievementPercentagesForApp\",\"version\":1,\"httpmethod\":\"GET\",\"parameters\":[]},{\"name\":\"GetNumberOfCurrentPlayers\",\"version\":1,\"httpmethod\":\"GET\",\"parameters\":[]}]},{\"name\":\"ISteamWebAPIUtil\",\"methods\":[{\"name\":\"GetServerInfo\",\"version\":1,\"httpmethod\":\"GET\",\"parameters\":[]},{\"name\":\"GetSupportedAPIList\",\"version\":1,\"httpmethod\":\"GET\",\"parameters\":[]}]}]}}", responseString);
         }
