@@ -20,6 +20,7 @@ public class Program
         var steamUserStats = app.MapGroup("/ISteamUserStats");
 
         steamUserStats.MapGet("/GetGlobalAchievementPercentagesForApp/v1/", GetGlobalAchievementPercentagesForAppV1.Handler);
+        steamUserStats.MapGet("/GetGlobalAchievementPercentagesForApp/v2/", GetGlobalAchievementPercentagesForAppV2.Handler);
         steamUserStats.MapGet("/GetNumberOfCurrentPlayers/v1/", GetNumberOfCurrentPlayers.Handler);
 
         var steamWebAPIUtil = app.MapGroup("/ISteamWebAPIUtil");
