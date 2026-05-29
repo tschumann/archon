@@ -1,6 +1,6 @@
 namespace Vapour.Models;
 
-class GameServer
+public class GameServer
 {
     // TODO: is it addr or address?
     public required string address { get; set; }

@@ -10,50 +10,6 @@ namespace Vapour.IGameServersService;
 /// </summary>
 public class GetServerList
 {
-    private static readonly List<GameServer> _servers =
-    [
-        new GameServer()
-        {
-            address = "127.0.0.1:27015",
-            gameport = 27015,
-            steamid = "123",
-            name = "Server",
-            appid = 70,
-            gamedir = "valve",
-            version = "1.0.0.0",
-            product = "Half-Life",
-            region = 255,
-            players = 16,
-            max_players = 32,
-            bots = 0,
-            map = "map",
-            secure = true,
-            dedicated = true,
-            os = "l",
-            gametype = "deathmatch"
-        },
-        new GameServer()
-        {
-            address = "127.0.0.1:27015",
-            gameport = 27015,
-            steamid = "123",
-            name = "Server",
-            appid = 50,
-            gamedir = "gearbox",
-            version = "1.0.0.0",
-            product = "Half-Life: Opposing Force",
-            region = 255,
-            players = 16,
-            max_players = 32,
-            bots = 0,
-            map = "of",
-            secure = true,
-            dedicated = true,
-            os = "l",
-            gametype = "deathmatch"
-        }
-    ];
-
     public readonly static Delegate Handler = [AuthMetadata("unused")] (HttpContext httpContext) =>
     {
         var filter = httpContext.Request.Query["filter"];
@@ -71,18 +27,27 @@ public class GetServerList
                 // every even-numbered entry is a filter attribute and every odd-numbered entry is the filter value
                 if (i % 2 == 0 && filterValues[i] == "appid")
                 {
-                    filters.appid = Convert.ToUInt32(filterValues[i + 1]);
+                    filters.appid = Convert.ToInt32(filterValues[i + 1]);
                 }
             }
 
             Console.WriteLine("Using filters {0}", filters);
         }
 
-        var servers = _servers;
+        var servers = Apps.apps.SelectMany(app => (app.Value.servers != null) ? app.Value.servers : []).ToList();
 
         if (filters?.appid != null)
         {
-            servers = servers.Where(server => server.appid == filters.appid).ToList();
+            int filterAppid = (int)filters?.appid;
+
+            if (Apps.apps.ContainsKey(filterAppid))
+            {
+                servers = Apps.apps.Where(app => app.Key == filterAppid).SelectMany(app => (app.Value.servers != null) ? app.Value.servers : []).ToList();
+            }
+            else
+            {
+                servers = [];
+            }
         }
 
         return new Dictionary<string, Dictionary<string, List<GameServer>>>

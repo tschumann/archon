@@ -2,7 +2,7 @@
 
 public class ServerListFilter
 {
-    public uint? appid { get; set; }
+    public int? appid { get; set; }
 
     public override string ToString()
     {
