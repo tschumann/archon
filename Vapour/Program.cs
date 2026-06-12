@@ -1,4 +1,5 @@
-﻿using Vapour.IGameServersService;
+﻿using Vapour.IClientStats;
+using Vapour.IGameServersService;
 using Vapour.ISteamUserStats;
 using Vapour.ISteamWebAPIUtil;
 
@@ -12,6 +13,10 @@ public class Program
 
         // NOTE: the trailing / on all these endpoints is optional but the framework seems to handle it being there/not being there
         var app = builder.Build();
+
+        var clientStats = app.MapGroup("/IClientStats_1046930");
+
+        clientStats.MapPost("/ReportEvent/v1/", ReportEvent.Handler);
 
         var gameServersService = app.MapGroup("/IGameServersService");
 
