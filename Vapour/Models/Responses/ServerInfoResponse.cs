@@ -1,6 +1,6 @@
-﻿namespace Vapour.Models;
+﻿namespace Vapour.Models.Responses;
 
-public class ServerInfo
+public class ServerInfoResponse
 {
     public required long servertime { get; set; }
 
