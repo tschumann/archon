@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Vapour.Models.Responses;
 
 namespace Vapour.Test.ISteamWebAPIUtil
@@ -18,10 +17,7 @@ namespace Vapour.Test.ISteamWebAPIUtil
             response.EnsureSuccessStatusCode();
             Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonSerializer.Deserialize<ServerInfoResponse>(responseString, new JsonSerializerOptions()
-            {
-                UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
-            });
+            var responseObject = JsonSerializer.Deserialize<ServerInfoResponse>(responseString, jsonSerialiserOptions);
             Assert.True(responseObject?.servertime > 0);
             Assert.Equal(responseObject?.servertimestring.Length, 24);
         }

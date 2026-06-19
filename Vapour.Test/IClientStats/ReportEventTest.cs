@@ -18,7 +18,7 @@ namespace Vapour.Test.IClientStats
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
             Assert.Equal(ExpectedSuccessfulContentType, response.Content.Headers?.ContentType?.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonSerializer.Deserialize<ReportEventResponse>(responseString, new JsonSerializerOptions());
+            var responseObject = JsonSerializer.Deserialize<ReportEventResponse>(responseString, jsonSerialiserOptions);
             Assert.False(responseObject?.success);
             Assert.Equal("", responseObject?.message);
         }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Vapour.Test
 {
@@ -7,6 +9,12 @@ namespace Vapour.Test
         protected readonly HttpClient _client;
 
         protected readonly WebApplicationFactory<Program> _factory;
+
+        // make sure extra fields don't come through as it should match the real thing
+        public JsonSerializerOptions jsonSerialiserOptions = new JsonSerializerOptions()
+        {
+            UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
+        };
 
         // TODO: it's UTF-8 in the real API
         public static string ExpectedSuccessfulContentType = "application/json; charset=utf-8";
