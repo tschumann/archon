@@ -10,4 +10,7 @@ $wd = Split-Path $scriptpath
 # set the working directory as this file's directory
 Push-Location $wd
 
-dotnet test --logger:"console;verbosity=detailed"
+# TODO: this results in "Could not find data collector 'XPlat Code Coverage'" but it still seems to work?
+dotnet test --logger:"console;verbosity=detailed" --collect:"XPlat Code Coverage"
+
+reportgenerator -reports:"**/TestResults/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html

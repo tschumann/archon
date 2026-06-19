@@ -5,6 +5,11 @@ Archon
 Tests
 -----
 
+Install `dotnet-reportgenerator-globaltool`:
+```
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
 Powershell:
 ```
 powershell ./test.ps1
