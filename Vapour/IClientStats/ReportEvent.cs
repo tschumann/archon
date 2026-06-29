@@ -1,4 +1,4 @@
-﻿using Vapour.Models;
+﻿using Vapour.Models.Responses;
 
 namespace Vapour.IClientStats;
 

@@ -1,4 +1,4 @@
-﻿namespace Vapour.Models;
+﻿namespace Vapour.Models.Responses;
 
 public class ReportEventResponse
 {

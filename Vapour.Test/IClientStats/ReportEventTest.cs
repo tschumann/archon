@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Text.Json;
-using Vapour.Models;
+using Vapour.Models.Responses;
 
 namespace Vapour.Test.IClientStats
 {
